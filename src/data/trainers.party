@@ -9620,9 +9620,13 @@ Music: Male
 Double Battle: No
 AI: Basic Trainer
 
-Mudkip
-Level: 5
+Croagunk
+Level: 3
+Ability: Poison Decimater
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+- Fake Out
+- Double Slap
+
 
 === TRAINER_BRENDAN_ROUTE_110_TORCHIC ===
 Name: BRENDAN

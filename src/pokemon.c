@@ -3142,6 +3142,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         case MON_DATA_ABILITY_NUM:
             SET8(substruct3->abilityNum);
             break;
+            //create new enum and new case
         case MON_DATA_COOL_RIBBON:
             SET8(substruct3->coolRibbon);
             break;

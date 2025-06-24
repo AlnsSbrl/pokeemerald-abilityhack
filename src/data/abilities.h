@@ -2408,4 +2408,14 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeSwapped = TRUE,
         .cantBeTraced = TRUE,
     },
+
+    [ABILITY_POISON_DECIMATER] =
+    {
+        .name = _("Poison Decimater"),
+        .description = COMPOUND_STRING("Poison touch and merciless."),
+        .aiRating = 8,
+        .cantBeCopied = TRUE,
+        .cantBeSwapped = TRUE,
+        .cantBeTraced = TRUE,
+    },
 };

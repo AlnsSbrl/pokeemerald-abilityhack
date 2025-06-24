@@ -1945,7 +1945,8 @@ s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordA
     }
     else if (gStatuses3[battlerAtk] & STATUS3_LASER_FOCUS
           || MoveAlwaysCrits(move)
-          || (abilityAtk == ABILITY_MERCILESS && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY))
+          || (abilityAtk == ABILITY_MERCILESS && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY)
+          || (abilityAtk == ABILITY_POISON_DECIMATER && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY))
     {
         critChance = CRITICAL_HIT_ALWAYS;
     }
@@ -2028,7 +2029,8 @@ s32 CalcCritChanceStageGen1(u32 battlerAtk, u32 battlerDef, u32 move, bool32 rec
     // Guaranteed crits
     else if (gStatuses3[battlerAtk] & STATUS3_LASER_FOCUS
              || MoveAlwaysCrits(move)
-             || (abilityAtk == ABILITY_MERCILESS && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY))
+             || (abilityAtk == ABILITY_MERCILESS && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY)
+             || (abilityAtk == ABILITY_POISON_DECIMATER&& gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY))
     {
         critChance = CRITICAL_HIT_ALWAYS;
     }
