@@ -5949,9 +5949,30 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Poochyena
-Level: 5
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Zigzagoon @ Oran Berry  
+Ability: Gluttony  
+Level: 5  
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Jolly Nature  
+- Tackle  
+- Growl  
+- Mud-Slap
+
+Fletchling @ Oran Berry  
+Ability: Gale Wings  
+Level: 5  
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Adamant Nature  
+- Quick Attack  
+- Growl
+
+Hoppip @ Oran Berry  
+Ability: Chlorophyll  
+Level: 5  
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Sunny Day  
+- Absorb  
+- Tackle
 
 === TRAINER_BILLY ===
 Name: BILLY
@@ -9620,12 +9641,10 @@ Music: Male
 Double Battle: No
 AI: Basic Trainer
 
-Croagunk
-Level: 3
-Ability: Poison Decimater
+Mudkip
+Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-- Fake Out
-- Double Slap
+
 
 
 === TRAINER_BRENDAN_ROUTE_110_TORCHIC ===
@@ -11057,13 +11076,20 @@ Music: Female
 Double Battle: No
 AI: Check Bad Move
 
-Zigzagoon
-Level: 4
+Pawmi @ Oran Berry
+Level: 8
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Ability: Static
+-Thunder Shock
+-Fake Out
+-Quick Attack
 
-Shroomish
-Level: 4
+Munna @ Lum Berry
+Level: 8
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+-Hypnosis
+-Defense Curl
+-Stored Power
 
 === TRAINER_HALEY_1 ===
 Name: HALEY
