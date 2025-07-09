@@ -12196,6 +12196,23 @@ const struct Item gItemsInfo[] =
 
 // Misc. Key Items
 
+    [ITEM_LEVEL_CANDY] = {
+        .name = _("Level Candy"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Raises one level\n"
+            "of a Pokémon til\n"
+            "the level cap."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_LevelCandy,
+        .effect = gItemEffect_LevelCandy,
+        .iconPic = gItemIcon_RareCandy,
+        .iconPalette = gItemIconPalette_ExpCandies,
+    },
+
+
     [ITEM_BICYCLE] =
     {
         .name = _("Bicycle"),

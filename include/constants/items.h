@@ -851,6 +851,7 @@
 #define ITEM_DYNAMAX_BAND 705
 
 // Misc. Key Items
+#define ITEM_LEVEL_CANDY 829
 #define ITEM_BICYCLE 706
 #define ITEM_MACH_BIKE 707
 #define ITEM_ACRO_BIKE 708
@@ -997,7 +998,7 @@
 // HOPO BERRY
 // LEGEND PLATE
 
-#define ITEMS_COUNT 829
+#define ITEMS_COUNT 830
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations

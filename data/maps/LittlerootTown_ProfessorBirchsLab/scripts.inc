@@ -132,7 +132,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GetRivalToTeachYou, MSGBOX_DEFAULT
 	clearflag FLAG_HIDE_ROUTE_101_BOY
 	setvar VAR_BIRCH_LAB_STATE, 3
-	giveitem ITEM_RARE_CANDY, 10
+	giveitem ITEM_LEVEL_CANDY,
 	releaseall
 	end
 
