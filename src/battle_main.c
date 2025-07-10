@@ -4791,9 +4791,12 @@ s32 GetBattleMovePriority(u32 battler, u32 ability, u32 move)
     if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX && GetMoveCategory(move) == DAMAGE_CATEGORY_STATUS)
         return GetMovePriority(MOVE_MAX_GUARD);
 
-    if (ability == ABILITY_GALE_WINGS
+    if ((ability == ABILITY_GALE_WINGS
         && (GetGenConfig(GEN_CONFIG_GALE_WINGS) < GEN_7 || IsBattlerAtMaxHp(battler))
         && GetMoveType(move) == TYPE_FLYING)
+        || (ability == ABILITY_AERILATE_WINGS
+        && (GetGenConfig(GEN_CONFIG_GALE_WINGS) < GEN_7 || IsBattlerAtMaxHp(battler))
+        && ((GetMoveType(move) == TYPE_FLYING) || GetMoveType(move)==TYPE_NORMAL)))
     {
         priority++;
     }
@@ -5776,6 +5779,7 @@ u32 TrySetAteType(u32 move, u32 battlerAtk, u32 attackerAbility)
         ateType = TYPE_ICE;
         break;
     case ABILITY_AERILATE:
+    case ABILITY_AERILATE_WINGS:
         ateType = TYPE_FLYING;
         break;
     case ABILITY_GALVANIZE:

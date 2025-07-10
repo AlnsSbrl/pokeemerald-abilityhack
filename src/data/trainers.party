@@ -5949,9 +5949,9 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Zigzagoon @ Oran Berry  
+Zigzagoon @ Liechi Berry 
 Ability: Gluttony  
-Level: 5  
+Level: 6  
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Jolly Nature  
 - Tackle  
@@ -5959,8 +5959,8 @@ Jolly Nature
 - Mud-Slap
 
 Fletchling @ Oran Berry  
-Ability: Gale Wings  
-Level: 5  
+Ability: Aerilate Wings 
+Level: 6  
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Adamant Nature  
 - Quick Attack  
@@ -5968,7 +5968,7 @@ Adamant Nature
 
 Hoppip @ Oran Berry  
 Ability: Chlorophyll  
-Level: 5  
+Level: 7  
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Sunny Day  
 - Absorb  
@@ -6236,13 +6236,22 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Zigzagoon
-Level: 4
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Poochyena @ Oran Berry
+Level: 8
+Ability: Rattled
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+-Howl
+-Bite
+-Fire Fang
 
-Taillow
-Level: 3
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Pikipek @ Oran Berry
+Level: 8
+Ability: Skill Link
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+-Peck
+-Echoed Voice
+-Rock Smash
+
 
 === TRAINER_TIMMY ===
 Name: TIMMY
@@ -11287,13 +11296,29 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Wurmple
-Level: 4
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Spinarak @ Oran Berry
+Level: 7
+Ability: Sniper
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+-Poison Sting
+-Absorb
+-Pursuit
 
-Wurmple
-Level: 4
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Sewaddle @ Focus Sash
+Level: 7
+Ability: Swarm
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+-Trailblaze
+-Bug Bite
+
+
+Dewpider @ Oran Berry
+Level: 7
+Ability: Water Bubble
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+-Infestation
+-Water Gun
+-Bug Bite
 
 === TRAINER_LYLE ===
 Name: LYLE

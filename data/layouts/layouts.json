@@ -4420,6 +4420,16 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/PetalburgRuins/border.bin",
       "blockdata_filepath": "data/layouts/PetalburgRuins/map.bin"
+    },
+    {
+      "id": "LAYOUT_PETALBURG_LAKE",
+      "name": "PetalburgLake_Layout",
+      "width": 30,
+      "height": 40,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Sootopolis",
+      "border_filepath": "data/layouts/PetalburgLake/border.bin",
+      "blockdata_filepath": "data/layouts/PetalburgLake/map.bin"
     }
   ]
 }

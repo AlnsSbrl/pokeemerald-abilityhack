@@ -2418,4 +2418,14 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeSwapped = TRUE,
         .cantBeTraced = TRUE,
     },
+
+    [ABILITY_AERILATE_WINGS] =
+    {
+        .name = _("Aerilate Wings"),
+        .description = COMPOUND_STRING("Aerilate and gale wings."),
+        .aiRating = 8,
+        .cantBeCopied = TRUE,
+        .cantBeSwapped = TRUE,
+        .cantBeTraced = TRUE,
+    },
 };

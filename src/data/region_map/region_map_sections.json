@@ -1706,6 +1706,10 @@
     {
       "id": "MAPSEC_PETALBURG_RUINS",
       "name": "PETALBURG RUINS"
+    },
+    {
+      "id": "MAPSEC_PETALBURG_LAKE",
+      "name": "PETALBURG LAKE"
     }
   ]
 }
