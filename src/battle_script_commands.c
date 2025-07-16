@@ -1504,7 +1504,7 @@ static bool32 AccuracyCalcHelper(u32 move, u32 battler)
         effect = TRUE;
     }
     // If the attacker has the ability No Guard and they aren't targeting a Pokemon involved in a Sky Drop with the move Sky Drop, move hits.
-    else if (GetBattlerAbility(gBattlerAttacker) == ABILITY_NO_GUARD
+    else if (( GetBattlerAbility(gBattlerAttacker) == ABILITY_NO_GUARD || GetBattlerAbility(gBattlerAttacker)==ABILITY_UNGUARDED_BREACH)
           && !(gStatuses3[battler] & STATUS3_COMMANDER)
           && (moveEffect != EFFECT_SKY_DROP || gBattleStruct->skyDropTargets[battler] == SKY_DROP_NO_TARGET))
     {
@@ -1512,7 +1512,7 @@ static bool32 AccuracyCalcHelper(u32 move, u32 battler)
         ability = ABILITY_NO_GUARD;
     }
     // If the target has the ability No Guard and they aren't involved in a Sky Drop or the current move isn't Sky Drop, move hits.
-    else if (GetBattlerAbility(battler) == ABILITY_NO_GUARD
+    else if ((GetBattlerAbility(battler) == ABILITY_NO_GUARD || GetBattlerAbility(battler)==ABILITY_UNGUARDED_BREACH)
           && (moveEffect != EFFECT_SKY_DROP || gBattleStruct->skyDropTargets[battler] == SKY_DROP_NO_TARGET))
     {
         effect = TRUE;
@@ -1674,7 +1674,7 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
 
     if (gBattleStruct->battlerState[battlerAtk].usedMicleBerry)
     {
-        if (atkAbility == ABILITY_RIPEN)
+        if (atkAbility == ABILITY_RIPEN || atkAbility == ABILITY_FAST_BINGE)
             calc = (calc * 140) / 100;  // ripen gives 40% acc boost
         else
             calc = (calc * 120) / 100;  // 20% acc boost
@@ -1946,6 +1946,7 @@ s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordA
     else if (gStatuses3[battlerAtk] & STATUS3_LASER_FOCUS
           || MoveAlwaysCrits(move)
           || (abilityAtk == ABILITY_MERCILESS && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY)
+          || (abilityAtk == ABILITY_MERCILESS_SNIPER && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY)
           || (abilityAtk == ABILITY_POISON_DECIMATER && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY))
     {
         critChance = CRITICAL_HIT_ALWAYS;
@@ -2030,7 +2031,8 @@ s32 CalcCritChanceStageGen1(u32 battlerAtk, u32 battlerDef, u32 move, bool32 rec
     else if (gStatuses3[battlerAtk] & STATUS3_LASER_FOCUS
              || MoveAlwaysCrits(move)
              || (abilityAtk == ABILITY_MERCILESS && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY)
-             || (abilityAtk == ABILITY_POISON_DECIMATER&& gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY))
+             || (abilityAtk == ABILITY_MERCILESS_SNIPER && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY)
+             || (abilityAtk == ABILITY_POISON_DECIMATER && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY))
     {
         critChance = CRITICAL_HIT_ALWAYS;
     }
@@ -12983,7 +12985,9 @@ static void Cmd_tryKO(void)
         if ((((gStatuses3[gBattlerTarget] & STATUS3_ALWAYS_HITS)
                 && gDisableStructs[gBattlerTarget].battlerWithSureHit == gBattlerAttacker)
             || GetBattlerAbility(gBattlerAttacker) == ABILITY_NO_GUARD
-            || targetAbility == ABILITY_NO_GUARD)
+            || GetBattlerAbility(gBattlerAttacker) == ABILITY_UNGUARDED_BREACH
+            || targetAbility == ABILITY_NO_GUARD
+            || targetAbility == ABILITY_UNGUARDED_BREACH)
             && gBattleMons[gBattlerAttacker].level >= gBattleMons[gBattlerTarget].level)
         {
             lands = TRUE;
@@ -15735,9 +15739,11 @@ static void Cmd_handleballthrow(void)
             catchRate = gBattleStruct->safariCatchFactor * 1275 / 100;
         else
             catchRate = gSpeciesInfo[gBattleMons[gBattlerTarget].species].catchRate;
+            
 
         if (gSpeciesInfo[gBattleMons[gBattlerTarget].species].isUltraBeast)
         {
+            //create similar clause for all legendary pokemon, changing the multiplier of 2 different pokeballs (master ball and another one for the hidden ability)
             if (ballId == BALL_BEAST)
                 ballMultiplier = 500;
             else
@@ -15964,10 +15970,19 @@ static void Cmd_handleballthrow(void)
             {
                 maxShakes = BALL_3_SHAKES_SUCCESS;
             }
-
+            
             if (ballId == BALL_MASTER)
             {
-                shakes = maxShakes;
+                shakes = maxShakes; 
+            }
+            else if((ballId == BALL_POKE || ballId == BALL_LUXURY)
+                    && !gSpeciesInfo[gBattleMons[gBattlerTarget].species].isLegendary
+                    && !gSpeciesInfo[gBattleMons[gBattlerTarget].species].isMythical
+                    && !gSpeciesInfo[gBattleMons[gBattlerTarget].species].isUltraBeast
+                    && !gSpeciesInfo[gBattleMons[gBattlerTarget].species].isPrimalReversion
+                )
+            {
+                shakes =maxShakes;
             }
             else
             {
@@ -16004,6 +16019,11 @@ static void Cmd_handleballthrow(void)
                 {
                     u32 friendship = (B_FRIEND_BALL_MODIFIER >= GEN_8 ? 150 : 200);
                     SetMonData(GetBattlerMon(gBattlerTarget), MON_DATA_FRIENDSHIP, &friendship);
+                }
+                else if(ballId == BALL_LUXURY)
+                {
+                u32 abilityNum = 3;
+                SetMonData(GetBattlerMon(gBattlerTarget), MON_DATA_ABILITY_NUM,&abilityNum);
                 }
             }
             else // not caught
@@ -18086,7 +18106,7 @@ void BS_TryWindRiderPower(void)
     u32 battler = GetBattlerForBattleScript(cmd->battler);
     u16 ability = GetBattlerAbility(battler);
     if (IsBattlerAlly(battler, gBattlerAttacker)
-        && (ability == ABILITY_WIND_RIDER || ability == ABILITY_WIND_POWER))
+        && (ability == ABILITY_WIND_RIDER || ability == ABILITY_WIND_POWER || ability==ABILITY_EOLIC_BATTERY))
     {
         gLastUsedAbility = ability;
         RecordAbilityBattle(battler, gLastUsedAbility);

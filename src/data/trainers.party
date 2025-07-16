@@ -5946,22 +5946,21 @@ Class: Youngster
 Pic: Youngster
 Gender: Male
 Music: Male
-Double Battle: No
+Double Battle: Yes
 AI: Check Bad Move
 
 Zigzagoon @ Liechi Berry 
-Ability: Gluttony  
+Ability: Fast Binge  
 Level: 6  
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-Jolly Nature  
-- Tackle  
-- Growl  
-- Mud-Slap
+IVs: 0 HP / 31 Atk / 0 Def / 31 SpA / 0 SpD / 31 Spe
+Adamant Nature  
+- Extreme Speed  
+- Tail Whip  
 
 Fletchling @ Oran Berry  
 Ability: Aerilate Wings 
 Level: 6  
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+IVs: 0 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Adamant Nature  
 - Quick Attack  
 - Growl
@@ -11296,29 +11295,25 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Spinarak @ Oran Berry
-Level: 7
-Ability: Sniper
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
--Poison Sting
--Absorb
--Pursuit
 
-Sewaddle @ Focus Sash
+Skorupi @ Oran Berry
 Level: 7
-Ability: Swarm
+Ability: Battle Armor
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
--Trailblaze
+-Fell Stinger
+-Poison Fang
+
+
+Spinarak @ Eviolite
+Level: 7
+Ability: Merciless Sniper
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+-Poison Fang
 -Bug Bite
+-Shadow Sneak
+-Toxic Thread
 
 
-Dewpider @ Oran Berry
-Level: 7
-Ability: Water Bubble
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
--Infestation
--Water Gun
--Bug Bite
 
 === TRAINER_LYLE ===
 Name: LYLE

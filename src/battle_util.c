@@ -3823,6 +3823,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             break;
+        case ABILITY_FELINE_MIGHT:
         case ABILITY_INTIMIDATE:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
@@ -4890,6 +4891,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             }
             break;
         case ABILITY_WIND_POWER:
+        case ABILITY_EOLIC_BATTERY:
             if (!IsWindMove(gCurrentMove))
                 break;
             // fall through
@@ -5867,6 +5869,12 @@ bool32 HasEnoughHpToEatBerry(u32 battler, u32 hpFraction, u32 itemId)
         RecordAbilityBattle(battler, ABILITY_GLUTTONY);
         return TRUE;
     }
+    if (hpFraction <= 4 && GetBattlerAbility(battler)== ABILITY_FAST_BINGE && isBerry
+        && gBattleMons[battler].hp <= gBattleMons[battler].maxHP / 2)
+        {
+            RecordAbilityBattle(battler,ABILITY_FAST_BINGE);
+            return TRUE;
+        }
 
     return FALSE;
 }
@@ -5883,7 +5891,7 @@ static enum ItemEffect HealConfuseBerry(u32 battler, u32 itemId, u32 flavorId, e
             gBattleStruct->moveDamage[battler] = 1;
         gBattleStruct->moveDamage[battler] *= -1;
 
-        if (GetBattlerAbility(battler) == ABILITY_RIPEN)
+        if (GetBattlerAbility(battler) == ABILITY_RIPEN ||  GetBattlerAbility(battler)==ABILITY_FAST_BINGE)
         {
             gBattleStruct->moveDamage[battler] *= 2;
             gBattlerAbility = battler;
@@ -5916,7 +5924,7 @@ static enum ItemEffect StatRaiseBerry(u32 battler, u32 itemId, u32 statId, enum 
     {
         BufferStatChange(battler, statId, STRINGID_STATROSE);
         gEffectBattler = gBattleScripting.battler = battler;
-        if (GetBattlerAbility(battler) == ABILITY_RIPEN)
+        if (GetBattlerAbility(battler) == ABILITY_RIPEN || GetBattlerAbility(battler)==ABILITY_FAST_BINGE)
             SET_STATCHANGER(statId, 2, FALSE);
         else
             SET_STATCHANGER(statId, 1, FALSE);
@@ -5968,7 +5976,7 @@ static enum ItemEffect RandomStatRaiseBerry(u32 battler, u32 itemId, enum ItemCa
         gBattleTextBuff2[6] = stringId >> 8;
         gBattleTextBuff2[7] = EOS;
         gEffectBattler = battler;
-        if (battlerAbility == ABILITY_RIPEN)
+        if (battlerAbility == ABILITY_RIPEN ||  GetBattlerAbility(battler)==ABILITY_FAST_BINGE)
             SET_STATCHANGER(stat, 4, FALSE);
         else
             SET_STATCHANGER(stat, 2, FALSE);
@@ -6019,7 +6027,7 @@ static enum ItemEffect TrySetEnigmaBerry(u32 battler)
     {
         gBattleScripting.battler = battler;
         gBattleStruct->moveDamage[battler] = (gBattleMons[battler].maxHP * 25 / 100) * -1;
-        if (GetBattlerAbility(battler) == ABILITY_RIPEN)
+        if (GetBattlerAbility(battler) == ABILITY_RIPEN ||  GetBattlerAbility(battler)==ABILITY_FAST_BINGE)
             gBattleStruct->moveDamage[battler] *= 2;
 
         BattleScriptPushCursor();
@@ -6043,7 +6051,7 @@ static enum ItemEffect DamagedStatBoostBerryEffect(u32 battler, u8 statId, u8 ca
         BufferStatChange(battler, statId, STRINGID_STATROSE);
 
         gEffectBattler = battler;
-        if (GetBattlerAbility(battler) == ABILITY_RIPEN)
+        if (GetBattlerAbility(battler) == ABILITY_RIPEN ||  GetBattlerAbility(battler)==ABILITY_FAST_BINGE)
             SET_STATCHANGER(statId, 2, FALSE);
         else
             SET_STATCHANGER(statId, 1, FALSE);
@@ -6143,7 +6151,7 @@ static u32 ItemRestorePp(u32 battler, u32 itemId, enum ItemCaseId caseID)
         {
             u32 ppRestored = GetBattlerItemHoldEffectParam(battler, itemId);
 
-            if (GetBattlerAbility(battler) == ABILITY_RIPEN)
+            if (GetBattlerAbility(battler) == ABILITY_RIPEN ||  GetBattlerAbility(battler)==ABILITY_FAST_BINGE)
             {
                 ppRestored *= 2;
                 gBattlerAbility = battler;
@@ -6186,7 +6194,7 @@ static u32 ItemHealHp(u32 battler, u32 itemId, enum ItemCaseId caseID, bool32 pe
             gBattleStruct->moveDamage[battler] = GetBattlerItemHoldEffectParam(battler, itemId) * -1;
 
         // check ripen
-        if (GetItemPocket(itemId) == POCKET_BERRIES && GetBattlerAbility(battler) == ABILITY_RIPEN)
+        if (GetItemPocket(itemId) == POCKET_BERRIES && (GetBattlerAbility(battler) == ABILITY_RIPEN ||  GetBattlerAbility(battler)==ABILITY_FAST_BINGE))
             gBattleStruct->moveDamage[battler] *= 2;
 
         gBattlerAbility = battler;    // in SWSH, berry juice shows ability pop up but has no effect. This is mimicked here
@@ -7273,7 +7281,7 @@ u32 ItemBattleEffects(enum ItemCaseId caseID, u32 battler, bool32 moveTurn)
                     gBattleStruct->moveDamage[gBattlerAttacker] = GetNonDynamaxMaxHP(gBattlerAttacker) / 8;
                     if (gBattleStruct->moveDamage[gBattlerAttacker] == 0)
                         gBattleStruct->moveDamage[gBattlerAttacker] = 1;
-                    if (GetBattlerAbility(battler) == ABILITY_RIPEN)
+                    if (GetBattlerAbility(battler) == ABILITY_RIPEN ||  GetBattlerAbility(battler)==ABILITY_FAST_BINGE)
                         gBattleStruct->moveDamage[gBattlerAttacker] *= 2;
 
                     effect = ITEM_HP_CHANGE;
@@ -7293,7 +7301,7 @@ u32 ItemBattleEffects(enum ItemCaseId caseID, u32 battler, bool32 moveTurn)
                     gBattleStruct->moveDamage[gBattlerAttacker] = GetNonDynamaxMaxHP(gBattlerAttacker) / 8;
                     if (gBattleStruct->moveDamage[gBattlerAttacker] == 0)
                         gBattleStruct->moveDamage[gBattlerAttacker] = 1;
-                    if (GetBattlerAbility(battler) == ABILITY_RIPEN)
+                    if (GetBattlerAbility(battler) == ABILITY_RIPEN ||  GetBattlerAbility(battler)==ABILITY_FAST_BINGE)
                         gBattleStruct->moveDamage[gBattlerAttacker] *= 2;
 
                     effect = ITEM_HP_CHANGE;
@@ -7703,7 +7711,8 @@ bool32 IsMoveMakingContact(u32 move, u32 battlerAtk)
             return FALSE;
     }
     else if ((atkHoldEffect == HOLD_EFFECT_PUNCHING_GLOVE && IsPunchingMove(move))
-           || GetBattlerAbility(battlerAtk) == ABILITY_LONG_REACH)
+           || GetBattlerAbility(battlerAtk) == ABILITY_LONG_REACH
+           || GetBattlerAbility(battlerAtk) == ABILITY_UNGUARDED_BREACH)
     {
         return FALSE;
     }
@@ -8463,6 +8472,7 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageCalculationData *
             modifier = uq4_12_multiply(modifier, UQ_4_12(GetGenConfig(GEN_CONFIG_ATE_MULTIPLIER) >= GEN_7 ? 1.2 : 1.3));
         break;
     case ABILITY_AERILATE:
+    case ABILITY_AERILATE_WINGS:
         if (moveType == TYPE_FLYING && gBattleStruct->ateBoost[battlerAtk])
             modifier = uq4_12_multiply(modifier, UQ_4_12(GetGenConfig(GEN_CONFIG_ATE_MULTIPLIER) >= GEN_7 ? 1.2 : 1.3));
         break;
@@ -8470,6 +8480,7 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageCalculationData *
         if (moveType == TYPE_NORMAL && gBattleStruct->ateBoost[battlerAtk] && GetGenConfig(GEN_CONFIG_ATE_MULTIPLIER) >= GEN_7)
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.2));
         break;
+    case ABILITY_FLUID_PUNK_VOICE:
     case ABILITY_PUNK_ROCK:
         if (IsSoundMove(move))
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
@@ -8503,6 +8514,7 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageCalculationData *
         switch (GetBattlerAbility(BATTLE_PARTNER(battlerAtk)))
         {
         case ABILITY_BATTERY:
+        case ABILITY_EOLIC_BATTERY:
             if (IsBattleMoveSpecial(move))
                 modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
             break;
@@ -9231,6 +9243,7 @@ static inline uq4_12_t GetAttackerAbilitiesModifier(u32 battlerAtk, uq4_12_t typ
             return UQ_4_12(1.25);
         break;
     case ABILITY_SNIPER:
+    case ABILITY_MERCILESS_SNIPER:
         if (isCrit)
             return UQ_4_12(1.5);
         break;
@@ -9263,6 +9276,7 @@ static inline uq4_12_t GetDefenderAbilitiesModifier(u32 move, u32 moveType, u32 
         if (IsMoveMakingContact(move, battlerAtk) && moveType != TYPE_FIRE)
             return UQ_4_12(0.5);
         break;
+    case ABILITY_FLUID_PUNK_VOICE:
     case ABILITY_PUNK_ROCK:
         if (IsSoundMove(move))
             return UQ_4_12(0.5);
@@ -9332,7 +9346,7 @@ static inline uq4_12_t GetDefenderItemsModifier(struct DamageCalculationData *da
         {
             if (damageCalcData->updateFlags)
                 gSpecialStatuses[battlerDef].berryReduced = TRUE;
-            return (abilityDef == ABILITY_RIPEN) ? UQ_4_12(0.25) : UQ_4_12(0.5);
+            return (abilityDef == ABILITY_RIPEN || abilityDef==ABILITY_FAST_BINGE) ? UQ_4_12(0.25) : UQ_4_12(0.5);
         }
         break;
     default:

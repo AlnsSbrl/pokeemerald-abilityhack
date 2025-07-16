@@ -4800,7 +4800,7 @@ s32 GetBattleMovePriority(u32 battler, u32 ability, u32 move)
     {
         priority++;
     }
-    else if (ability == ABILITY_PRANKSTER && IsBattleMoveStatus(move))
+    else if ((ability == ABILITY_PRANKSTER ||ability==ABILITY_FELINE_MIGHT)&& IsBattleMoveStatus(move))
     {
         gProtectStructs[battler].pranksterElevated = 1;
         priority++;
@@ -5994,7 +5994,7 @@ u32 GetDynamicMoveType(struct Pokemon *mon, u32 move, u32 battler, enum MonState
         break;
     }
 
-    if (IsSoundMove(move) && ability == ABILITY_LIQUID_VOICE)
+    if (IsSoundMove(move) && (ability == ABILITY_LIQUID_VOICE || ability==ABILITY_FLUID_PUNK_VOICE))
     {
         return TYPE_WATER;
     }

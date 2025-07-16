@@ -2414,9 +2414,6 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Poison Decimater"),
         .description = COMPOUND_STRING("Poison touch and merciless."),
         .aiRating = 8,
-        .cantBeCopied = TRUE,
-        .cantBeSwapped = TRUE,
-        .cantBeTraced = TRUE,
     },
 
     [ABILITY_AERILATE_WINGS] =
@@ -2424,8 +2421,42 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Aerilate Wings"),
         .description = COMPOUND_STRING("Aerilate and gale wings."),
         .aiRating = 8,
-        .cantBeCopied = TRUE,
-        .cantBeSwapped = TRUE,
-        .cantBeTraced = TRUE,
+    },
+
+    [ABILITY_FAST_BINGE] =
+    {
+        .name = _("Fast Binge"),
+        .description = COMPOUND_STRING("Gluttony and ripen."),
+        .aiRating = 8,
+    },
+    [ABILITY_MERCILESS_SNIPER] =
+    {
+        .name = _("Merciless Sniper"),
+        .description = COMPOUND_STRING("Merciless and sniper."),
+        .aiRating = 8,
+    },
+    [ABILITY_EOLIC_BATTERY] =
+    {
+        .name = _("Eolic Battery"),
+        .description = COMPOUND_STRING("Wind power and battery."),
+        .aiRating = 8,
+    },
+    [ABILITY_FELINE_MIGHT] =
+    {
+        .name = _("Feline Might"),
+        .description = COMPOUND_STRING("Intimidate and Praknster."),
+        .aiRating = 8,
+    },
+    [ABILITY_FLUID_PUNK_VOICE] =
+    {
+        .name = _("Fluid Punk Voice"),
+        .description = COMPOUND_STRING("Liquid Voice and Punk Rock."),
+        .aiRating = 8,
+    },
+    [ABILITY_UNGUARDED_BREACH] =
+    {
+        .name = _("Unguarded breach"),
+        .description = COMPOUND_STRING("No Guard and Long Reach."),
+        .aiRating = 8,
     },
 };
